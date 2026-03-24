@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<Layout title="OZE Wrocław — Energia odnawialna na Dolnym Śląsku">
+  <section style="background:linear-gradient(135deg,#ff8c42 0%,var(--orange) 50%,#c84a00 100%);padding:4rem 0;margin-bottom:3rem;">
+    <div class="container">
+      <span style="background:var(--yellow);color:var(--text);font-size:0.75rem;font-weight:800;padding:0.3rem 0.8rem;border-radius:4px;font-family:'Nunito',sans-serif;text-transform:uppercase;letter-spacing:0.06em;">Portal OZE</span>
+      <h1 style="font-family:'Nunito',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:#fff;margin:0.75rem 0 1rem;line-height:1.1;">OZE na Dolnym Śląsku</h1>
+      <p style="font-size:1.1rem;color:rgba(255,255,255,0.9);max-width:580px;">Aktualności, analizy i poradniki o fotowoltaice, wietrze i czystej energii we Wrocławiu i regionie.</p>
+    </div>
+  </section>
+  <div class="container" style="padding-bottom:3rem;">
+    {posts.length > 0 ? (
+      <>
+        <h2 style="font-family:'Nunito',sans-serif;font-size:1.5rem;color:var(--text);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;">
+          <span style="width:4px;height:1.5rem;background:var(--orange);display:inline-block;border-radius:2px;"></span>
+          Najnowsze artykuły
+        </h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;">
+          {posts.map(p => <PostCard title={p.data.title} description={p.data.description} slug={p.slug} pubDate={p.data.pubDate} tags={p.data.tags} />)}
+        </div>
+      </>
+    ) : (
+      <div style="text-align:center;padding:4rem 0;">
+        <div style="font-size:4rem;margin-bottom:1rem;">☀️</div>
+        <h2 style="font-family:'Nunito',sans-serif;color:var(--orange);">Artykuły wkrótce!</h2>
+        <p style="color:var(--text-muted);">Przygotowujemy dla Ciebie treści o OZE na Dolnym Śląsku.</p>
+      </div>
+    )}
+  </div>
+</Layout>

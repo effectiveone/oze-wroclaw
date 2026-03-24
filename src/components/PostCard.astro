@@ -1,0 +1,30 @@
+---
+interface Props { title: string; description: string; slug: string; pubDate: Date; tags?: string[]; }
+const { title, description, slug, pubDate, tags } = Astro.props;
+const dateStr = new Date(pubDate).toLocaleDateString('pl-PL', { day: 'numeric', month: 'short', year: 'numeric' });
+---
+<article class="oze-card">
+  <div class="card-inner">
+    {tags?.map(t => <span class="pill">{t}</span>)}
+    <h2><a href={`/blog/${slug}`}>{title}</a></h2>
+    <p>{description}</p>
+    <div class="card-foot">
+      <time>{dateStr}</time>
+      <a href={`/blog/${slug}`} class="cta">Czytaj →</a>
+    </div>
+  </div>
+</article>
+<style>
+.oze-card { background: var(--card-bg); border-radius: 12px; box-shadow: 0 2px 12px rgba(224,107,32,0.08); transition: transform 0.2s, box-shadow 0.2s; overflow: hidden; border-top: 4px solid var(--orange); }
+.oze-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(224,107,32,0.15); }
+.card-inner { padding: 1.5rem; }
+.pill { background: var(--yellow-light); color: var(--orange-dark); font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 20px; margin-right: 0.3rem; display: inline-block; margin-bottom: 0.6rem; }
+.oze-card h2 { font-size: 1.15rem; margin-bottom: 0.6rem; }
+.oze-card h2 a { color: var(--text); }
+.oze-card h2 a:hover { color: var(--orange); }
+.oze-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
+.card-foot { display: flex; justify-content: space-between; align-items: center; }
+time { font-size: 0.78rem; color: var(--text-muted); }
+.cta { background: var(--orange); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 6px; font-family: 'Nunito', sans-serif; }
+.cta:hover { background: var(--orange-dark); }
+</style>

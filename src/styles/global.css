@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap');
+
+:root {
+  --orange: #e06b20;
+  --orange-dark: #b85318;
+  --yellow: #f5c842;
+  --yellow-light: #fef4c0;
+  --warm-bg: #fef9f0;
+  --card-bg: #ffffff;
+  --text: #2a1a0a;
+  --text-muted: #7a5f42;
+  --border: #f0e0c0;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Open Sans', sans-serif; background: var(--warm-bg); color: var(--text); line-height: 1.65; }
+a { color: var(--orange); text-decoration: none; }
+a:hover { color: var(--orange-dark); }
+h1, h2, h3 { font-family: 'Nunito', sans-serif; font-weight: 800; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
